@@ -1,0 +1,25 @@
+@import '../../../constants.scss';
+
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $gutter-size--large;
+  border-bottom: $border-standard;
+}
+
+.navbar__menu {
+  cursor: pointer;
+}
+
+.navbar__logo {
+  max-height: 33px;
+}
+
+.navbar__badge {
+  border-radius: 50%;
+  background-color: $transparent-grey;
+  color: white;
+  padding: 8px 6px;
+  cursor: pointer;
+}
