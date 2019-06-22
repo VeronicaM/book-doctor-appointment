@@ -8,7 +8,7 @@ import LoggerService from './logger.service.js';
 const filename = "user.service.js";
 
 const getUserData = (uid = 1) => {
-	   const onSuccess = (response) => {
+    const onSuccess = (response) => {
         if (response && response.data) {
             return response.data;
         }
@@ -26,11 +26,13 @@ const getUserData = (uid = 1) => {
     };
 
     // get user endpoint url with passed in params
-	const URL =EndpointService.buildURL(EndpointService.constants.USER, { uid });
+    const URL = EndpointService.buildURL(EndpointService.constants.USER, { uid });
 
-	return axios.get(URL); 
+    return axios.get(URL)
+        .then(onSuccess)
+        .catch(onError);
 };
 
 export default {
-	getUserData
+    getUserData
 };
