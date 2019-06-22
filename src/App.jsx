@@ -80,9 +80,11 @@ class App extends Component {
 
         return (<Fragment>
           <NavBar /> 
-          <h1 className="headline"> New Appointment </h1>
-          <UserInfo userData={this.state.userData} />
-          <BookAppointmentForm /> 
+          <div className="app__container"> 
+              <h1 className="headline"> New Appointment </h1>
+              <UserInfo userData={this.state.userData} />
+              <BookAppointmentForm />
+          </div> 
       </Fragment>);
     }
 }
