@@ -6,7 +6,7 @@
     "node": ">=10.13"
   },
   "scripts": {
-    "start": "yarn server & react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "precommit": "lint-staged",
