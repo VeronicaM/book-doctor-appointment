@@ -9,6 +9,9 @@ import UserInfo from './features/user/UserInfo.jsx';
 // Services
 import UserService from './services/user.service.js';
 
+// CSS
+import './App.scss';
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -74,10 +77,10 @@ class App extends Component {
         if (this.state.isError) {
             return <div className="error__container"> Something went wrong! Please contact support at teamX@support.com or try again later.</div>
         }
-     
+
         return (<Fragment>
           <NavBar /> 
-          <h1> New Appointment </h1>
+          <h1 className="headline"> New Appointment </h1>
           <UserInfo userData={this.state.userData} />
           <BookAppointmentForm /> 
       </Fragment>);
