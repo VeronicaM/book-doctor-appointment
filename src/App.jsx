@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react'
 
 // Components
-import logo from './logo.png'
 import BookAppointmentForm from './features/appointments/BookAppointmentForm.jsx';
 import NavBar from './features/common/navbar/NavBar.jsx';
 import UserInfo from './features/user/UserInfo.jsx';
