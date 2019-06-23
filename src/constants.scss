@@ -1,8 +1,5 @@
 // These constants are used throughout the design and are here to make things easier for you!
 
-$gutter-size: 4px;
-$gutter-size--large: 2 * $gutter-size;
-
 // C O L O R S
 $primary: #7e5ced;
 $primary-dark: #653ee3;
@@ -37,3 +34,10 @@ $border-standard: solid 1px #dddddd;
 // Layout
 $bottom-spacing: 20px;
 $bottom-spacing--large: 2 * $bottom-spacing;
+$gutter-size: 4px;
+$gutter-size--large: 2 * $gutter-size;
+
+// Typography
+$font-size-medium: 16px;
+$font-size-large: 18px;
+$font-weight-strong: 700;
