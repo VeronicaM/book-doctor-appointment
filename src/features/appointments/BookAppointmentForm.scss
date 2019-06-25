@@ -27,10 +27,11 @@
 	display: flex;
     margin-left: 40px;
     overflow-x: scroll;
+    scrollbar-width: none; // hide scrollbar on Firefox
 }
 
 .form-row__children::-webkit-scrollbar { 
-    display: none; 
+    display: none;
 }
 
 // BookAppointmentForm 
