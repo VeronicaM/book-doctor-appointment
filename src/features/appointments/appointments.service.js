@@ -3,9 +3,13 @@ import axios from 'axios';
 // Services
 import EndpointService from '../../services/endpoint.service.js';
 import LoggerService from '../../services/logger.service.js';
+import DateUtilsService from '../../services/date-utils.service.js';
 
 // Constants
 const filename = 'appointments.service.js';
+
+// cache available slots promise to avoid useleess requests
+let availableSlotsPromise = null;
 
 const consultantType = [{
     value: 'gp',
@@ -60,7 +64,11 @@ const formSections = [{
     title: 'Attach a photo'
 }];
 
-const getAvailableSlots = () => {
+const getAvailableSlots = (consultantType) => {
+    if (availableSlotsPromise) {
+        return availableSlotsPromise;
+    }
+
     const onSuccess = (response) => {
         if (response && response.data) {
             return response.data;
@@ -81,15 +89,54 @@ const getAvailableSlots = () => {
     // get user endpoint url with passed in params
     const URL = EndpointService.buildURL(EndpointService.constants.AVAILABLE_SLOTS);
 
-    return axios.get(URL)
+    availableSlotsPromise = axios.get(URL)
         .then(onSuccess)
         .catch(onError);
+
+    return availableSlotsPromise;
 };
 
+const getAvailableSlotPerConsultant = (availableSlots, consultantType) => {
+    // Add default Another time if no slot available
+    const availableSlotsResult = [{
+        label: 'Another time',
+        value: 'anotherTime'
+    }];
+    
+    const hasConsultantType = (availableSlot) => availableSlot.consultantType.includes(consultantType);
+   
+    const getTimeString = (availableSlot) => {
+        const slotDate = new Date(availableSlot.time);
+        const slotTime = `${slotDate.getHours()}:${slotDate.getMinutes()}`;
+
+        if(DateUtilsService.isToday(slotDate)) {
+            // if today return time slot label in format: Today hh: mm  
+            return {
+                label: `Today ${slotTime}`,
+                value: availableSlot.time
+            };
+        }
+        
+        //else return time slot label in format: dd MM DD yyyy, hh:mm
+        return {
+            label: `${slotDate.toDateString()}, ${slotTime}`,
+            value: availableSlot.time
+        };
+    };
+
+    const filteredAvailableSlots = availableSlots.filter(hasConsultantType)
+        .map(getTimeString);
+    
+    // add available slots for given consultant Type
+    availableSlotsResult.unshift(...filteredAvailableSlots);
+
+    return availableSlotsResult;
+};
 
 export default {
     consultantType,
     formSections,
     getAvailableSlots,
+    getAvailableSlotPerConsultant,
     appointmentType
 };
