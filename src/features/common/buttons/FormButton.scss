@@ -1,0 +1,23 @@
+@import '../../../constants.scss';
+
+.form-btn {
+	min-width: 100px;
+	background-color: transparent;
+	color: $label-color;
+    outline: none;
+    border: 1px solid $light-grey;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.form-btn:hover {
+	background-color: $positive-light;
+	color: white;
+}
+
+.form-btn--selected {
+	background-color: $positive;
+	color: white;
+}
