@@ -1,0 +1,42 @@
+@import '../../constants.scss';
+
+// AppointmentFormRow
+.form-row__container {
+	padding-bottom: $bottom-spacing--large;
+}
+
+.form-row__header {
+	display: flex;
+    align-items: flex-end;
+    margin-bottom: $bottom-spacing;
+}
+
+.form-row__icon {
+	width: 18px;
+	margin-right: 20px;
+	font-size: $font-size-large;
+	color: $transparent-grey;
+}
+
+.form-row__title {
+	font-size: $font-size-medium;
+	font-weight: $font-weight-strong;
+}
+
+.form-row__children {
+	display: flex;
+    margin-left: 40px;
+    overflow-x: scroll;
+}
+
+.form-row__children::-webkit-scrollbar { 
+    display: none; 
+}
+
+// BookAppointmentForm 
+.book-appointment-form__notes {
+	width: 90%;
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid $light-grey;
+}
