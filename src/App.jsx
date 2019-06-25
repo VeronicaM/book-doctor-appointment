@@ -82,7 +82,7 @@ class App extends Component {
           <div className="app__container"> 
               <h1 className="headline"> New Appointment </h1>
               <UserInfo userData={this.state.userData} />
-              <BookAppointmentForm />
+              <BookAppointmentForm userId={this.state.userData.id}/>
           </div> 
       </Fragment>);
     }

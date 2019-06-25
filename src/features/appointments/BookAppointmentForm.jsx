@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 // Services 
 import AppointmentsService from './appointments.service.js';
@@ -37,8 +38,8 @@ class BookAppointmentForm extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevState.appointment.consultant !== this.state.appointment.consultant) {
-            this.getAvailableSlotsForConsultantType();         
+        if (prevState.appointment.consultant !== this.state.appointment.consultant) {
+            this.getAvailableSlotsForConsultantType();
         }
     }
 
@@ -67,6 +68,7 @@ class BookAppointmentForm extends Component {
 
         const onSuccess = (data) => {
             const availableSlotsForConsultant = AppointmentsService.getAvailableSlotPerConsultant(data, this.state.appointment.consultant);
+
             const updatedAppointment = {
                 ...this.state.appointment,
                 time: availableSlotsForConsultant[0].value
@@ -172,14 +174,47 @@ class BookAppointmentForm extends Component {
         return AppointmentsService.formSections.map(renderRow);
     };
 
+    saveAppointment = () => {
+        const onSuccess = (isSaved) => {
+            if(isSaved) {
+               return this.stateSetter({ isSuccess: true });     
+            }
+           
+            onError('Could not save');
+        };
+
+        const onError = (error) => {
+            this.stateSetter({ isError: true });
+        };
+
+        AppointmentsService.saveAppointment(this.state.appointment, this.props.userId)
+            .then(onSuccess)
+            .catch(onError);
+    };
+
     render() {
+        const notificationMessage = this.state.isError ?
+            <div className="error-msg"> Something went wrong </div> :
+            this.state.isSuccess ? <div className="success-msg"> Appointment saved! </div> : null;
+
         return (
             <Fragment> 
                 {this.renderFormRows()}
+                <button 
+                    className="book-appointment-form__cta" 
+                    value="Book"
+                    onClick={this.saveAppointment}
+                > 
+                    Book 
+                </button>
+                {notificationMessage}
             </Fragment>
         );
     }
 }
 
+BookAppointmentForm.propTypes = {
+    userId: PropTypes.string.isRequired
+};
 
 export default BookAppointmentForm;

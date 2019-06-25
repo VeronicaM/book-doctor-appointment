@@ -133,10 +133,44 @@ const getAvailableSlotPerConsultant = (availableSlots, consultantType) => {
     return availableSlotsResult;
 };
 
+const saveAppointment = (appointment, userId) => {
+    const onSuccess = (response) => {
+        if (response.status === 201) {
+            return true;
+        }
+
+        return onError('Could not save appointment!');
+    };
+
+    const onError = (error) => {
+        // Send error to logging monitoring system
+        LoggerService.log({
+            message: error,
+            type: LoggerService.MESSAGE_TYPES.ERROR,
+            filename
+        });
+    };
+
+    // get user endpoint url with passed in params
+    const URL = EndpointService.buildURL(EndpointService.constants.CREATE_APPOINTMENT);
+
+    const data = {
+        userId: userId,
+        dateTime: appointment.time,
+        notes: appointment.notes,
+        type: appointment.consultant
+    };
+
+    return axios.post(URL, data)
+        .then(onSuccess)
+        .catch(onError);
+};
+
 export default {
     consultantType,
     formSections,
     getAvailableSlots,
     getAvailableSlotPerConsultant,
+    saveAppointment,
     appointmentType
 };

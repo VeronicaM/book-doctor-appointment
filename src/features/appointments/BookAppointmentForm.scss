@@ -41,3 +41,33 @@
 	border-radius: 10px;
 	border: 1px solid $light-grey;
 }
+
+.book-appointment-form__cta {
+	width: 100%;
+	padding: 10px;
+	background-color: $positive;
+	color: white;
+	border-radius: 10px;
+	font-size: $font-size-large;
+	border: none;
+	cursor: pointer;
+}
+
+.book-appointment-form__cta:hover {
+	background-color: $positive-light;
+}
+
+.error-msg,
+.success-msg {
+	padding: 10px;
+	margin: 10px 0;
+}
+
+.error-msg {
+	background-color: $negative-light;
+	color: white;
+}
+
+.success-msg {
+	background-color: $color-success;
+}
