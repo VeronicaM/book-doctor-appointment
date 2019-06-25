@@ -1,25 +1,30 @@
+import axios from 'axios';
+
 // Services
 import EndpointService from '../../services/endpoint.service.js';
+import LoggerService from '../../services/logger.service.js';
 
 // Constants
-const consultantTypes = [{
-    code: 'gp',
+const filename = 'appointments.service.js';
+
+const consultantType = [{
+    value: 'gp',
     label: 'GP',
     description: 'Babylon GP'
 }, {
-    code: 'specialist',
+    value: 'specialist',
     label: 'Specialist',
     description: 'Specialist'
 }, {
-    code: 'nurse',
+    value: 'nurse',
     label: 'Nurse',
     description: 'Nurse'
 }, {
-    code: 'therapist',
+    value: 'therapist',
     label: 'Therapist',
     description: 'Therapist'
 }, {
-    code: 'triageNurse',
+    value: 'triageNurse',
     label: 'Triage Nurse',
     description: 'Triage Nurse'
 }];
@@ -75,7 +80,7 @@ const getAvailableSlots = () => {
 
     // get user endpoint url with passed in params
     const URL = EndpointService.buildURL(EndpointService.constants.AVAILABLE_SLOTS);
-    
+
     return axios.get(URL)
         .then(onSuccess)
         .catch(onError);
@@ -83,7 +88,7 @@ const getAvailableSlots = () => {
 
 
 export default {
-    consultantTypes,
+    consultantType,
     formSections,
     getAvailableSlots,
     appointmentType
