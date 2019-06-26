@@ -64,7 +64,7 @@ const formSections = [{
     title: 'Attach a photo'
 }];
 
-const getAvailableSlots = (consultantType) => {
+const getAvailableSlots = () => {
     if (availableSlotsPromise) {
         return availableSlotsPromise;
     }
@@ -129,7 +129,6 @@ const getAvailableSlotPerConsultant = (availableSlots, consultantType) => {
     
     // add available slots for given consultant Type
     availableSlotsResult.unshift(...filteredAvailableSlots);
-
     return availableSlotsResult;
 };
 
