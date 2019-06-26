@@ -30,16 +30,21 @@ class BookAppointmentForm extends Component {
 
         // keep track of mounted state to prevent setting state on unmounted component
         this.hasMounted = false;
+        this.notificationRef = React.createRef(); // used to scroll notification msg into view      
     }
 
     componentDidMount() {
         this.hasMounted = true;
-        this.getAvailableSlotsForCurrentConsultantType();
+        this.getAvailableSlotsForConsultantType();
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.appointment.consultant !== this.state.appointment.consultant) {
             this.getAvailableSlotsForConsultantType();
+        }
+
+        if (this.notificationRef && this.notificationRef.current) {
+            this.notificationRef.current.scrollIntoView();
         }
     }
 
@@ -57,7 +62,7 @@ class BookAppointmentForm extends Component {
         }
     };
 
-    getAvailableSlotsForCurrentConsultantType = () => {
+    getAvailableSlotsForConsultantType = () => {
         const onError = (error) => {
             this.stateSetter({
                 availableSlots: [],
@@ -176,10 +181,13 @@ class BookAppointmentForm extends Component {
 
     saveAppointment = () => {
         const onSuccess = (isSaved) => {
-            if(isSaved) {
-               return this.stateSetter({ isSuccess: true });     
+            if (isSaved) {
+                return this.stateSetter({ 
+                    isSuccess: true, 
+                    appointment: defaultAppointment // reset appointment state
+                });
             }
-           
+
             onError('Could not save');
         };
 
@@ -193,9 +201,11 @@ class BookAppointmentForm extends Component {
     };
 
     render() {
+        // show notification message
         const notificationMessage = this.state.isError ?
-            <div className="error-msg"> Something went wrong </div> :
-            this.state.isSuccess ? <div className="success-msg"> Appointment saved! </div> : null;
+            <div ref={this.notificationRef} className="error-msg"> Something went wrong </div> :
+            this.state.isSuccess ? <div ref={this.notificationRef} className="success-msg"> Appointment saved! </div> : null;
+
 
         return (
             <Fragment> 
@@ -214,7 +224,7 @@ class BookAppointmentForm extends Component {
 }
 
 BookAppointmentForm.propTypes = {
-    userId: PropTypes.string.isRequired
+    userId: PropTypes.number.isRequired
 };
 
 export default BookAppointmentForm;
