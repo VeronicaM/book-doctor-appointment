@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react'
 
 // Components
-import logo from './logo.png'
 import BookAppointmentForm from './features/appointments/BookAppointmentForm.jsx';
 import NavBar from './features/common/navbar/NavBar.jsx';
 import UserInfo from './features/user/UserInfo.jsx';
@@ -83,7 +82,7 @@ class App extends Component {
           <div className="app__container"> 
               <h1 className="headline"> New Appointment </h1>
               <UserInfo userData={this.state.userData} />
-              <BookAppointmentForm />
+              <BookAppointmentForm userId={this.state.userData.id}/>
           </div> 
       </Fragment>);
     }

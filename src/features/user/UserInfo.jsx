@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // CSS
@@ -7,7 +7,7 @@ import './UserInfo.scss';
 const UserInfo = ({ userData }) => {
     return (<div className="user-info__container" > 
 		<div className="user-info__avatar-container"> 
-			<img className="user-info__avatar-img" src={userData.avatar} /> 
+			<img className="user-info__avatar-img" alt="user-avatar" src={userData.avatar} /> 
 			<div className="user-info__name"> 
 				{userData.firstName} {userData.lastName}
 			</div>

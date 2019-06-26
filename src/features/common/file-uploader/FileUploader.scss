@@ -1,0 +1,10 @@
+
+@import '../../../constants.scss';
+
+.file-uploader__btn {
+	width: 16px;
+	padding: 16px;
+	border: 1px solid $light-grey;
+	font-size: smaller;
+	cursor: pointer;
+}
