@@ -5,6 +5,11 @@
 	padding-bottom: $bottom-spacing--large;
 }
 
+.form-row__container:last-of-type {
+	border-bottom: $border-standard;
+	margin-bottom: $bottom-spacing;
+}
+
 .form-row__header {
 	display: flex;
     align-items: flex-end;
