@@ -20,5 +20,16 @@ To configure locally you will need to have installed on your machine:
 ## Run the project
 * Run `yarn start` or `npm start` in the root of your project. This should open the project in your default browser at http://localhost:3000/ 
 
-## Technical choices and Tradeoffs 
+## Technical choices and Tradeoffs
 
+- Enzyme for testing in additional to the JEST setup made available by create-react-app.
+  I've chosen to use Enzyme thanks to
+   - the ease of testing components
+   - I was already familiar with it.
+  #### Tradeoffs
+    In a production app I would maybe investigate different testing libraries like react-testing-library as:
+    - it is more light-weight
+    - it allows you to focus more on testing the user interaction with the app instead of components implementation details.
+- Heroku for deployment 
+  I've chosen to use Heroku thanks to its ease of use and free availability 
+- If I had more time to work on it I would ensure better test coverage as well as cross browser compatibility and keyboard accessibility only, screen readers accessibility with proper HTML5 semantic markup. 
