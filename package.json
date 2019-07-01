@@ -6,7 +6,8 @@
     "node": ">=10.13"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-client": "react-scripts start",
+    "start": "concurrently \"npm:start-client\" \"npm:server\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "server": "yarn json-server --watch ./data/data.json --port 3010"
